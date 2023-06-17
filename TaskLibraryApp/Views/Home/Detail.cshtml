@@ -1,0 +1,31 @@
+﻿@using TaskLibraryApp.Entities
+@model Book
+
+
+<div class="row">
+    <div class="col-md-9">
+
+        <div class="card">
+            <img src="@Model.PhotoUrl" class="card-img-top" />
+            <br />
+            <img src="@Model.BackPhotoUrl" class="card-img-top" />
+            <div class="card-body">
+                <h5 class="card-title">Title : @Model.Title</h5>
+                <h5 class="card-title">Author : @Model.Author</h5>
+                <p class="card-title">Category : @Model.Category.Name</p>
+                <p class="card-text">Content : @Model.Content</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Status : @Model.Status.Name</h4>
+                <div class="d-grid">
+                    <a asp-controller="Home" asp-action="Book" asp-route-id="@Model.Id" class="btn btn-primary">Book this Book</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

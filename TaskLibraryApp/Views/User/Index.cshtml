@@ -1,0 +1,30 @@
+﻿@using TaskLibraryApp.Entities
+@model User
+
+
+
+  <div class="col-md-9">
+
+        <div class="card">
+            <div class="card-body">
+
+                <h5 class="card-title">Kullanıcı bilgileri</h5>
+
+                <table class="table table-striped">
+
+                    <tr>
+                        <td>User Name</td>
+                        <td>@Model.Name</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>@Model.Email</td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td>@Model.Password</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>

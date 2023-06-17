@@ -1,0 +1,41 @@
+﻿@model List<UserHistoryVM>
+
+@{
+    ViewData["Title"] = "History";
+    int count = 0;
+}
+<h2>Your History</h2>
+<hr />
+@if (Model.Any())
+
+{
+
+    @foreach (var item in Model)
+    {
+        count++;
+        if (count == 1 || (count % 3 == 1))
+        {
+            @Html.Raw("<div class='row row-cols-1 row-cols-md-3 g-4 mb-2' >")
+        }
+        <div class="col">
+            <div class="card">
+                <img src="@item.PhotoPath" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Title @item.BookTitle</h5>
+                    <h5 class="card-title">Author @item.Author</h5>
+                    <p class="card-text">Description @item.Description</p>
+                    <h4 class="card-title">BookDate @item.BookDate </h4>
+                    <h4 class="card-title">EndDate @item.EndDate </h4>
+
+                  
+                </div>
+            </div>
+        </div>
+
+        if (count % 3 == 0)
+        {
+            @Html.Raw("</div>")
+        }
+
+    }
+}
