@@ -63,5 +63,16 @@ namespace TaskLibraryApp.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login", "Access");
         }
+        public IActionResult CreateUser()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateUser(CreateUserVM createUserVM)
+        {
+            _userService.CreateUser(new Entities.User() { Name = createUserVM.Name,  Email = createUserVM.Email, Password = createUserVM.PassWord });
+            return RedirectToAction("Login");
+        }
     }
 }

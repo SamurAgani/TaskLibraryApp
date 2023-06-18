@@ -63,11 +63,11 @@ namespace TaskLibraryApp.Service
             string backPhotoUrl = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Photos", backGouid + bookCreate.BackPhotoUrlFile.FileName);
             using (var stream = new FileStream(frontPhotoUrl, FileMode.Create))
             {
-                bookCreate.PhotoUrlFile.CopyToAsync(stream);
+                bookCreate.PhotoUrlFile.CopyTo(stream);
             }
             using (var stream = new FileStream(backPhotoUrl, FileMode.Create))
             {
-                bookCreate.BackPhotoUrlFile.CopyToAsync(stream);
+                bookCreate.BackPhotoUrlFile.CopyTo(stream);
             }
           
             var book = _mapper.Map<Book>(bookCreate);
