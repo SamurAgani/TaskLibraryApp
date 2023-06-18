@@ -22,14 +22,14 @@ namespace TaskLibraryApp.Repository
             Delete(User);
         }
 
-        public IEnumerable<User> GetAllUsers(bool isTrackingChanges)
+        public IEnumerable<User> GetAllUsers()
         {
-            return GetAll(isTrackingChanges);
+            return GetAll();
         }
 
-        public User GetById(int id, bool isTrackingChanges)
+        public User GetById(int id)
         {
-            return GetWithCondition(c => c.Id == id, isTrackingChanges).FirstOrDefault();
+            return GetWithCondition(c => c.Id == id).FirstOrDefault();
         }
 
         public List<UserHistoryVM> GetUserHistory(string email)

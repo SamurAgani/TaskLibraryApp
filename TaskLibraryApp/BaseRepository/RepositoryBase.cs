@@ -21,18 +21,14 @@ namespace TaskLibraryApp.BaseRepository
             _libraryDBContext.Set<T>().Remove(entity);
         }
         //The AsNoTracking() extension method returns a new query and the returned entities will not be cached by the context (DbContext or _libraryDBContext)
-        public IQueryable<T> GetAll(bool isTrackChanges)
+        public IQueryable<T> GetAll()
         {
-            if (isTrackChanges)
-                return _libraryDBContext.Set<T>();
-            return _libraryDBContext.Set<T>().AsNoTracking();
+            return _libraryDBContext.Set<T>();
         }
 
-        public IQueryable<T> GetWithCondition(Expression<Func<T, bool>> expression, bool isTrackChanges)
+        public IQueryable<T> GetWithCondition(Expression<Func<T, bool>> expression)
         {
-            if (isTrackChanges)
-                return _libraryDBContext.Set<T>().Where(expression);
-            return _libraryDBContext.Set<T>().Where(expression).AsNoTracking();
+           return _libraryDBContext.Set<T>().Where(expression);
         }
 
         public void Update(T entity)

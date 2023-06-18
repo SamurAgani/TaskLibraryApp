@@ -15,7 +15,7 @@ namespace TaskLibraryApp.Controllers
         public IActionResult Index()
         {
             string userMail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-            var user = _userService.GetByEmail(userMail,true);
+            var user = _userService.GetByEmail(userMail);
             return View(user);
         }
         public IActionResult CheckOutHistory()

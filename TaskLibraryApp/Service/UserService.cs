@@ -16,7 +16,7 @@ namespace TaskLibraryApp.Service
 
         public User CheckUser(VMLogin vMLogin)
         {
-            var user = _repositoryManager.Users.GetWithCondition(x=>x.Email == vMLogin.Email && x.Password == vMLogin.PassWord, true).FirstOrDefault();
+            var user = _repositoryManager.Users.GetWithCondition(x=>x.Email == vMLogin.Email && x.Password == vMLogin.PassWord).FirstOrDefault();
             return user;
         }
 
@@ -31,20 +31,20 @@ namespace TaskLibraryApp.Service
             _repositoryManager.Users.Delete(user);
         }
 
-        public IEnumerable<User> GetAllUsers(bool isTrackingChanges)
+        public IEnumerable<User> GetAllUsers()
         {
-            return _repositoryManager.Users.GetAllUsers(isTrackingChanges);
+            return _repositoryManager.Users.GetAllUsers();
         }
 
-        public User GetByEmail(string mail, bool isTrackingChanges)
+        public User GetByEmail(string mail)
         {
-            var user = _repositoryManager.Users.GetWithCondition(x => x.Email == mail, isTrackingChanges).FirstOrDefault();
+            var user = _repositoryManager.Users.GetWithCondition(x => x.Email == mail).FirstOrDefault();
             return user;
         }
 
-        public User GetById(int id, bool isTrackingChanges)
+        public User GetById(int id)
         {
-            return _repositoryManager.Users.GetById(id, isTrackingChanges);
+            return _repositoryManager.Users.GetById(id);
         }
 
         public List<UserHistoryVM> GetUserHistory(string mail)

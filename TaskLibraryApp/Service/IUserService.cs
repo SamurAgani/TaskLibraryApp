@@ -5,9 +5,9 @@ namespace TaskLibraryApp.Service
 {
     public interface IUserService
     {
-        IEnumerable<User> GetAllUsers(bool isTrackingChanges);
-        User GetById(int id, bool isTrackingChanges);
-        User GetByEmail(string mail, bool isTrackingChanges);
+        IEnumerable<User> GetAllUsers();
+        User GetById(int id);
+        User GetByEmail(string mail);
         List<UserHistoryVM> GetUserHistory(string mail);
         void CreateUser(User user);
         void UpdateUser(User user);

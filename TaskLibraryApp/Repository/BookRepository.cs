@@ -18,14 +18,14 @@ namespace TaskLibraryApp.Repository
             Delete(book);
         }
 
-        public IEnumerable<Book> GetAllBooks(bool isTrackingChanges)
+        public IEnumerable<Book> GetAllBooks()
         {
-            return GetAll(isTrackingChanges).Include(x=>x.Status);
+            return GetAll().Include(x=>x.Status);
         }
 
-        public Book GetById(int id, bool isTrackingChanges)
+        public Book GetById(int id)
         {
-            return GetWithCondition(c => c.Id == id, isTrackingChanges).Include(x=>x.Category)
+            return GetWithCondition(c => c.Id == id).Include(x=>x.Category)
                                                                        .Include(x=>x.Status)
                                                                        .FirstOrDefault();
         }

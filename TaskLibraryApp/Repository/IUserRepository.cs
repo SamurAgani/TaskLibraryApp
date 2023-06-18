@@ -5,8 +5,8 @@ namespace TaskLibraryApp.Repository
 {
     public interface IUserRepository
     {
-        IEnumerable<User> GetAllUsers(bool isTrackingChanges);
-        User GetById(int id, bool isTrackingChanges);
+        IEnumerable<User> GetAllUsers();
+        User GetById(int id);
         List<UserHistoryVM> GetUserHistory(string email);
         void CreateUser(User user);
         void UpdateUser(User user);

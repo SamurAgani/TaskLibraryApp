@@ -24,7 +24,7 @@ namespace TaskLibraryApp.Controllers
 
         public IActionResult Index()
         {
-            var books = _bookService.GetAllBooks(true).ToList();
+            var books = _bookService.GetAllBooks(false).ToList();
             _bookService.CheckBookStatuses();
             return View(books);
         }

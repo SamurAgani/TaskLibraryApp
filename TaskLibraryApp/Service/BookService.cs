@@ -23,9 +23,10 @@ namespace TaskLibraryApp.Service
             {
                 try
                 {
-                    var bookEntity = _repositoryManager.Books.GetById(book.BookId, true);
+                    var bookEntity = _repositoryManager.Books.GetById(book.BookId);
                     bookEntity.StatusId = (int)BookStatuses.Booked;
                     _repositoryManager.BookingHistory.Add(new BookingHistory() { BookId = book.BookId, UserId = book.UserId, BookDate = DateTime.Now, EndDate = DateTime.Now.AddDays(7) });
+                    _repositoryManager.Books.Update(bookEntity);
                     _repositoryManager.Save();
                     transaction.Commit();
                     return true;
@@ -42,12 +43,12 @@ namespace TaskLibraryApp.Service
         public void CheckBookStatuses()
         {
             #region check enddates
-            var allBookedBooks = _repositoryManager.Books.GetWithCondition(x => x.Status.Id == (int)BookStatuses.Booked, true).ToList();
+            var allBookedBooks = _repositoryManager.Books.GetWithCondition(x => x.Status.Id == (int)BookStatuses.Booked).ToList();
 
             foreach (var book in allBookedBooks)
             {
-                var shouldGiveBack = _repositoryManager.BookingHistory.GetWithCondition(x => x.BookId == book.Id && x.EndDate < DateTime.Now, true).Any();
-                if (shouldGiveBack)
+                var shouldGiveBack = _repositoryManager.BookingHistory.GetWithCondition(x => x.BookId == book.Id && x.EndDate > DateTime.Now).Any();
+                if (!shouldGiveBack)
                     GiveBookBack(book.Id);
             }
             #endregion
@@ -86,15 +87,15 @@ namespace TaskLibraryApp.Service
 
         public IEnumerable<Book> GetAllBooks(bool isTrackingChanges)
         {
-            var allBooks = _repositoryManager.Books.GetAllBooks(isTrackingChanges);
+            var allBooks = _repositoryManager.Books.GetAllBooks();
             
             return allBooks;
         }
 
         public BookDetailsVM GetBookDetails(int id, int userId)
         {
-            var book = _repositoryManager.Books.GetById(id, true);
-            var isThisUserBooked = _repositoryManager.BookingHistory.GetWithCondition(x => x.UserId == userId && x.BookId == id && x.EndDate > DateTime.Now, true).Any();
+            var book = _repositoryManager.Books.GetById(id);
+            var isThisUserBooked = _repositoryManager.BookingHistory.GetWithCondition(x => x.UserId == userId && x.BookId == id && x.EndDate > DateTime.Now).Any();
             var bookDetails = _mapper.Map<BookDetailsVM>(book);
             bookDetails.LoginUserBooked = isThisUserBooked;
             return bookDetails;
@@ -102,12 +103,12 @@ namespace TaskLibraryApp.Service
 
         public Book GetById(int id, bool isTrackingChanges)
         {
-            return _repositoryManager.Books.GetById(id, true);
+            return _repositoryManager.Books.GetById(id);
         }
 
         public IEnumerable<Book> GetMyAllBooks(int userId)
         {
-            return _repositoryManager.Books.GetWithCondition(x=>x.UserId == userId, true).Include(x=>x.Status);
+            return _repositoryManager.Books.GetWithCondition(x=>x.UserId == userId).Include(x=>x.Status);
         }
 
         public bool GiveBookBack(int bookId)
@@ -116,9 +117,9 @@ namespace TaskLibraryApp.Service
             {
                 try
                 {
-                    var bookEntity = _repositoryManager.Books.GetById(bookId, true);
+                    var bookEntity = _repositoryManager.Books.GetById(bookId);
                     bookEntity.StatusId = (int)BookStatuses.Available;
-                    var bookHistory = _repositoryManager.BookingHistory.GetWithCondition(x=>x.BookId == bookId, true).OrderByDescending(x=>x.Id).FirstOrDefault();
+                    var bookHistory = _repositoryManager.BookingHistory.GetWithCondition(x=>x.BookId == bookId).OrderByDescending(x=>x.Id).FirstOrDefault();
                     bookHistory.EndDate = DateTime.Now;
                     _repositoryManager.Save();
                     transaction.Commit();

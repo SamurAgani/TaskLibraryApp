@@ -21,7 +21,7 @@ namespace TaskLibraryApp.CacheManager
             Statuses = memoryCache.Get("BookStatuses") as List<BookStatus>;
             if(Statuses == null)
             {
-                Statuses = repositoryManager.BookStatuses.GetAll(true).ToList();
+                Statuses = repositoryManager.BookStatuses.GetAll().ToList();
                 var cacheOption = new MemoryCacheEntryOptions()
                 {
                     AbsoluteExpiration = DateTime.Now.AddMinutes(30),
@@ -39,7 +39,7 @@ namespace TaskLibraryApp.CacheManager
             Categories = memoryCache.Get("BookCategories") as List<Category>;
             if (Categories == null)
             {
-                Categories = repositoryManager.Categories.GetAll(true).ToList();
+                Categories = repositoryManager.Categories.GetAll().ToList();
                 var cacheOption = new MemoryCacheEntryOptions()
                 {
                     AbsoluteExpiration = DateTime.Now.AddMinutes(30),

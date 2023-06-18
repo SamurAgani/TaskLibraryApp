@@ -4,8 +4,8 @@ namespace TaskLibraryApp.BaseRepository
 {
     public interface IRepositoryBase<T>
     {
-        IQueryable<T> GetAll(bool isTrackChanges);
-        IQueryable<T> GetWithCondition(Expression<Func<T, bool>> expression, bool isTrackChanges);
+        IQueryable<T> GetAll();
+        IQueryable<T> GetWithCondition(Expression<Func<T, bool>> expression);
 
         void Add(T entity);
         void Update(T entity);
