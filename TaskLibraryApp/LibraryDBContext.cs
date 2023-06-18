@@ -13,7 +13,18 @@ namespace TaskLibraryApp
 
         public LibraryDBContext(DbContextOptions<LibraryDBContext> options) : base(options)
         {
-
+            if (!BookStatus.Any())
+            {
+                BookStatus.Add(new BookStatus() { Name = "Available" });
+                BookStatus.Add(new BookStatus() { Name = "Booked" });
+                SaveChanges();
+            }
+            if (!Categories.Any())
+            {
+                Categories.Add(new Category() { Name = "Action" });
+                Categories.Add(new Category() { Name = "Dram" });
+                SaveChanges();
+            }
         }
     }
 }

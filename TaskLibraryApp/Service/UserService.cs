@@ -23,6 +23,7 @@ namespace TaskLibraryApp.Service
         public void CreateUser(User user)
         {
             _repositoryManager.Users.Add(user);
+            _repositoryManager.Save();
         }
 
         public void DeleteUser(User user)

@@ -3,7 +3,7 @@
 
     public enum BookStatuses
     {
-        Available = 2,
+        Available = 1,
         Booked
     }
 
@@ -11,7 +11,7 @@
     public enum Categories
     {
         Action = 1,
-        Booked
+        Dram
     }
 
 }
