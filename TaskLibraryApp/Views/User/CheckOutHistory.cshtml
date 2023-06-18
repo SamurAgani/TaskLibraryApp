@@ -26,8 +26,10 @@
                     <p class="card-text">Description @item.Description</p>
                     <h4 class="card-title">BookDate @item.BookDate </h4>
                     <h4 class="card-title">EndDate @item.EndDate </h4>
+                    <div>
+                        <a asp-controller="Home" asp-action="Detail" class="btn btn-success" asp-route-id="@item.BookId">Detail</a>
+                    </div>
 
-                  
                 </div>
             </div>
         </div>

@@ -1,0 +1,71 @@
+﻿@using TaskLibraryApp.CacheManager
+@using TaskLibraryApp.Entities
+@using TaskLibraryApp.RepositoryManager
+@model CreateUpdateBookVM
+@{
+        //var categories = TempData["Categories"] as List<Category>;
+        //var categoriesSelectList = new SelectList(categories, "Id", "Name");
+
+}
+
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Add book</h5>
+                <form asp-controller="Home" asp-action="Create" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <div class="mb-3">
+                            <label asp-for="Author" class="form-label"></label>
+                            <input asp-for="Author" class="form-control" />
+                            <span class="text-danger" asp-validation-for="Author"></span>
+                        </div>
+                        <div class="mb-3">
+
+                            <label asp-for="Title" class="form-label"></label>
+                            <input asp-for="Title" class="form-control" />
+                            <span class="text-danger" asp-validation-for="Title"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="ShortDescription" class="form-label"></label>
+                            <input asp-for="ShortDescription" class="form-control" />
+                            <span class="text-danger" asp-validation-for="ShortDescription"></span>
+                        </div>
+                        <div class="mb-3">
+
+                            <label asp-for="Content" class="form-label"></label>    
+                            <textarea  asp-for="Content" class="form-control"></textarea>
+                            <span class="text-danger" asp-validation-for="Content"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label" asp-for="CategoryId"></label>
+                            <select asp-for="CategoryId" class="form-control" asp-items="@ViewBag.categoryList">
+                            </select>
+
+                            <span class="text-danger" asp-validation-for="CategoryId"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="PhotoUrlFile" class="form-label"></label>
+                            <input asp-for="PhotoUrlFile" type="file" class="form-control" />
+                            <span class="text-danger" asp-validation-for="PhotoUrlFile"></span>
+
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="BackPhotoUrlFile" class="form-label"></label>
+                            <input asp-for="BackPhotoUrlFile" type="file" class="form-control" />
+                            <span class="text-danger" asp-validation-for="BackPhotoUrlFile"></span>
+
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
